@@ -10,38 +10,38 @@ class Index extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Model_empleado');
+		$this->load->model('Model_usuarios');
 	}
 
 	public function index(){
-		$resultados = $this->Model_empleado->getAll();
+		$resultados = $this->Model_usuarios->getAll();
 		$this->data['resultados'] = $resultados;
 		$this->data['titulo'] = "Nuevo titulo";
 		$this->load->view('vIndex', $this->data);
 	}
 
-	public function eliminar($CodEmpleado) {
+	public function eliminar($Nit) {
         // Llamar al modelo para eliminar el usuario por su ID
-        $this->Model_empleado->eliminar_empleado($CodEmpleado);
+        $this->Model_usuarios->eliminar_usuario($Nit);
 
         // Redirigir a una página de éxito o a donde desees
-        redirect('Index/');
+        redirect('index/');
     }
 
-	public function guardarEmpleado(){
+	public function guardarCliente(){
         // Obtener los datos del formulario
         $data = array(
-            'CodEmpleado' => $this->input->post('CodEmpleado'),
+            'Nit' => $this->input->post('Nit'),
             'Nombre' => $this->input->post('Nombre'),
             'Telefono' => $this->input->post('Telefono'),
             'Correo' => $this->input->post('Correo'),
-            'Direccion' => $this->input->post('Direccion')
+            'Direccionl' => $this->input->post('Direccionl')
         );
 
         // Insertar los datos en la tabla de clientes a través del modelo
-        $this->Model_empleado->insertarEmpleado($data);
+        $this->Model_usuarios->insertarCliente($data);
 
         // Redirigir a la página de éxito o donde sea necesario
-        redirect('Index/');
+        redirect('index/');
 	}
 }

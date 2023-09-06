@@ -9,10 +9,10 @@
 <body>
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
   <div>
-    <h3>Datos Empleado</h3>
-    <form class="form-group" action="<?php echo site_url('index/guardarEmpleado') ?>" method="post">
-      <label for="codEmpleado">Codigo Empleado</label>
-      <input class="form-control" type="text" name="CodEmpleado" value="" placeholder="Ingrese el Codigo" required>
+    <h3>Datos Usuario</h3>
+    <form class="form-group" action="<?php echo site_url('index/guardarCliente') ?>" method="post">
+      <label for="nit">Nit</label>
+      <input class="form-control" type="text" name="Nit" value="" placeholder="Ingrese el Nit" required>
       <label for="nombre">Nombre</label>
       <input class="form-control" type="text" name="Nombre" value="" placeholder="Ingrese el Nombre" required>
       <label for="telefono">Telefono</label>
@@ -20,7 +20,7 @@
       <label for="correo">Correo</label>
       <input class="form-control" type="text" name="Correo" value="" placeholder="Ingrese el correo" required>
       <label for="direccion">Direccion</label>
-      <input class="form-control" type="text" name="Direccion" value="" placeholder="Ingrese direccion completa" required>
+      <input class="form-control" type="text" name="Direccionl" value="" placeholder="Ingrese direccion completa" required>
       <button class="btn btn-primary" type="submit">Boton Guardar</button>
       
     </form>
@@ -30,7 +30,7 @@
 	<hr>
 	<table class="table table-hover table-striped">
 		<thead>
-			<th>Cod Empleado</th>
+			<th>Nit</th>
 			<th>Nombre</th>
 			<th>Telefono</th>
 			<th>Correo</th>
@@ -39,17 +39,17 @@
 		<tbody>
 			<?php foreach ($resultados as $row): ?>
 				<tr>
-					<td><?php echo $row->CodEmpleado; ?></td>
+					<td><?php echo $row->Nit; ?></td>
 					<td><?php echo $row->Nombre; ?></td>
 					<td><?php echo $row->Telefono; ?></td>
           <td><?php echo $row->Correo; ?></td>
-          <td><?php echo $row->Direccion; ?></td>
+          <td><?php echo $row-> Direccionl; ?></td>
 					<td>
-						<form action="<?php echo site_url('index/eliminar/' . $row->CodEmpleado); ?>" method="post">
+						<form action="<?php echo site_url('index/eliminar/' . $row->Nit); ?>" method="post">
 						 <button class="btn btn-danger" type="submit">Eliminar</button>
                 		</form>
           </td>
-          <td><form action="<?php echo site_url('index/eliminar/' . $row->CodEmpleado); ?>" method="post">
+          <td><form action="<?php echo site_url('index/eliminar/' . $row->Nit); ?>" method="post">
 						 <button class="btn btn-warning" type="submit">Modificar</button>
                 		</form>
           </td>
@@ -69,7 +69,7 @@
     const eliminarButtons = document.querySelectorAll('.eliminar-btn');
     eliminarButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const CodEmpleado = this.getAttribute('data-CodEmpleado');
+            const idUsuario = this.getAttribute('data-idusuario');
 
             // Realizar una solicitud AJAX para eliminar el usuario
             const xhr = new XMLHttpRequest();
@@ -83,7 +83,7 @@
                     // Si la respuesta del controlador devuelve datos actualizados, puedes refrescar la tabla.
                 }
             };
-            xhr.send('CodEmpleado=' + encodeURIComponent(CodEmpleado));
+            xhr.send('idusuario=' + encodeURIComponent(idUsuario));
 
             // Si no estás utilizando AJAX, la acción predeterminada del formulario eliminará el usuario
             // Sin embargo, puede haber redireccionamientos y es posible que la tabla no se actualice sin recargar la página.

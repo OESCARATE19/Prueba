@@ -12,10 +12,19 @@ class Model_usuarios extends CI_Model
 		parent::__construct();
 	}
 
-	public function getAllUsers(){
-		$this->db->select('idusuario, usuario, pass');
-		$this->db->from('usuario');
+	public function getAll(){
+		$this->db->select('Nit, Nombre, Telefono, Correo, Direccionl');
+		$this->db->from('cliente');
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function insertarCliente($data) {
+        $this->db->insert('cliente', $data);
+    }
+
+	public function eliminar_usuario($Nit) {
+        $this->db->where('Nit', $Nit);
+        $this->db->delete('cliente');
+    }
 }

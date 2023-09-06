@@ -10,17 +10,15 @@
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
   <div>
     <h3>Datos Empleado</h3>
-    <form class="form-group" action="<?php echo site_url('index/guardarEmpleado') ?>" method="post">
-      <label for="codEmpleado">Codigo Empleado</label>
-      <input class="form-control" type="text" name="CodEmpleado" value="" placeholder="Ingrese el Codigo" required>
+    <form class="form-group" action="<?php echo site_url('index/guardarSucursal') ?>" method="post">
+      <label for="idsucursal">Sucursal</label>
+      <input class="form-control" type="text" name="idSucursal" value="" placeholder="Ingrese el Codigo" required>
       <label for="nombre">Nombre</label>
       <input class="form-control" type="text" name="Nombre" value="" placeholder="Ingrese el Nombre" required>
-      <label for="telefono">Telefono</label>
-      <input class="form-control" type="number" name="Telefono" value="" placeholder="Ingrese el Telefono" required>
-      <label for="correo">Correo</label>
-      <input class="form-control" type="text" name="Correo" value="" placeholder="Ingrese el correo" required>
-      <label for="direccion">Direccion</label>
-      <input class="form-control" type="text" name="Direccion" value="" placeholder="Ingrese direccion completa" required>
+      <label for="ubicacion">Ubicacion</label>
+      <input class="form-control" type="number" name="Ubicacion" value="" placeholder="Ingrese el Telefono" required>
+      <label for="horario">Horario</label>
+      <input class="form-control" type="text" name="Horario" value="" placeholder="Ingrese el correo" required>
       <button class="btn btn-primary" type="submit">Boton Guardar</button>
       
     </form>
@@ -30,26 +28,24 @@
 	<hr>
 	<table class="table table-hover table-striped">
 		<thead>
-			<th>Cod Empleado</th>
+			<th>Sucursal</th>
 			<th>Nombre</th>
-			<th>Telefono</th>
-			<th>Correo</th>
-      <th>Direccion</th>
+			<th>Ubicacion</th>
+			<th>Horario</th>
 		</thead>
 		<tbody>
 			<?php foreach ($resultados as $row): ?>
 				<tr>
-					<td><?php echo $row->CodEmpleado; ?></td>
+					<td><?php echo $row->idSucursal; ?></td>
 					<td><?php echo $row->Nombre; ?></td>
-					<td><?php echo $row->Telefono; ?></td>
-          <td><?php echo $row->Correo; ?></td>
-          <td><?php echo $row->Direccion; ?></td>
+					<td><?php echo $row->Ubicacion; ?></td>
+          <td><?php echo $row->Horario; ?></td>
 					<td>
-						<form action="<?php echo site_url('index/eliminar/' . $row->CodEmpleado); ?>" method="post">
+						<form action="<?php echo site_url('index/eliminar/' . $row->idSucursal); ?>" method="post">
 						 <button class="btn btn-danger" type="submit">Eliminar</button>
                 		</form>
           </td>
-          <td><form action="<?php echo site_url('index/eliminar/' . $row->CodEmpleado); ?>" method="post">
+          <td><form action="<?php echo site_url('index/eliminar/' . $row->idSucursal); ?>" method="post">
 						 <button class="btn btn-warning" type="submit">Modificar</button>
                 		</form>
           </td>
@@ -69,7 +65,7 @@
     const eliminarButtons = document.querySelectorAll('.eliminar-btn');
     eliminarButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const CodEmpleado = this.getAttribute('data-CodEmpleado');
+            const idSucursal = this.getAttribute('data-idSucursal');
 
             // Realizar una solicitud AJAX para eliminar el usuario
             const xhr = new XMLHttpRequest();
@@ -83,7 +79,7 @@
                     // Si la respuesta del controlador devuelve datos actualizados, puedes refrescar la tabla.
                 }
             };
-            xhr.send('CodEmpleado=' + encodeURIComponent(CodEmpleado));
+            xhr.send('idSucursal=' + encodeURIComponent(idSucursal));
 
             // Si no estás utilizando AJAX, la acción predeterminada del formulario eliminará el usuario
             // Sin embargo, puede haber redireccionamientos y es posible que la tabla no se actualice sin recargar la página.
